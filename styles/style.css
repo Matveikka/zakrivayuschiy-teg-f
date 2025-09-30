@@ -13,8 +13,8 @@
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
-  font-family: var(--main-font);
-  font-variation-settings: "wght" var(--regular-text-weight);
+  font-family: var(--main-font, sans-serif);
+  font-variation-settings: "wght" var(--regular-text-weight, 410);
   background-image: repeating-linear-gradient(
       to right,
       #d3d3d3,
@@ -47,22 +47,23 @@
   margin-block: 100px;
   background-color: #fff;
   border: solid #000 2px;
-  min-height: 368px;
   gap: 20px;
 }
 
 .header_text {
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, sans-serif);
   font-weight: 400;
   text-transform: uppercase;
 }
 
 .header_title {
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
+  padding-top: 130px;
 }
 
 .header_subtitle {
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  padding-bottom: 130px;
 }
 
 .card_list {
@@ -82,18 +83,21 @@
 }
 
 .card_title {
-  font-family: var(--main-font);
+  font-family: var(--main-font, sans-serif);
   font-size: 18px;
-  font-variation-settings: "wght" var(--card-header-weight);
+  font-variation-settings: "wght" var(--card-header-weight, 715);
   padding: 4px 10px;
 }
 
 .card_image {
   width: 100%;
+  border-block: solid #000 2px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .card_watermark {
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, sans-serif);
   text-transform: uppercase;
   font-size: 14px;
   position: absolute;
@@ -101,14 +105,15 @@
   right: 25px;
   opacity: 50%;
   mix-blend-mode: hard-light;
-  text-shadow: -1px 0 var(--label-color), 0 1px var(--label-color),
-    1px 0 var(--label-color), 0 -1px var(--label-color);
+  z-index: 1;
+  text-shadow: -1px 0 var(--label-color, #fff), 0 1px var(--label-color, #fff),
+    1px 0 var(--label-color, #fff), 0 -1px var(--label-color, #fff);
 }
 
 @supports ((text-stroke: 1px #000000) or (-webkit-text-stroke: 1px #000000)) {
-  .card__image-lable {
-    -webkit-text-stroke: 1px var(--label-color);
-    text-stroke: 1px var(--label-color);
+  .card_watermark {
+    -webkit-text-stroke: 1px var(--label-color, #fff);
+    text-stroke: 1px var(--label-color, #fff);
     text-shadow: none;
   }
 }
@@ -116,11 +121,23 @@
 .card_text {
   display: flex;
   flex-direction: column;
-  font-family: var(--main-font);
-  font-variation-settings: "wght" var(--regular-text-weight);
+  font-family: var(--main-font, sans-serif);
+  font-variation-settings: "wght" var(--regular-text-weight, 410);
   font-size: 18px;
   padding: 18px 26px 0px 25px;
-  gap: 20px;
+  gap: 25px;
+}
+
+.button {
+  border: none;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  border: 2px solid black;
+  cursor: pointer;
 }
 
 .card_buttons_list {
@@ -133,15 +150,9 @@
 }
 
 .card__icon-button {
-  border: none;
-  background-color: #fff;
   width: 38px;
   height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border: 2px solid transparent;
-  transition: border-color 0.3s ease;
 }
 
 .card__icon-button:focus {
@@ -149,26 +160,21 @@
 }
 
 .card__icon-button:focus-visible {
-  border-color: var(--accent-color);
+  border-color: var(--accent-color, #000);
 }
 
 .card__like-button {
-  width: 130px;
-  height: 38px;
-  color: var(--hover-text-color);
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-width: 130px;
+  min-height: 38px;
+  color: var(--hover-text-color, #fff);
   transition: box-shadow 0.3s ease;
-  position: relative;
 }
 
-.card__like-button:focus,
-.save__button:focus,
-.dialog_button:focus {
+.card__like-button:focus-visible,
+.save__button:focus-visible,
+.dialog_button:focus-visible {
   outline: none;
-  box-shadow: 2px 2px 0 var(--accent-color);
+  box-shadow: 2px 2px 0 var(--accent-color, #000);
 }
 
 .card__like-button::after,
@@ -193,49 +199,58 @@
   transform: scaleX(1);
 }
 
-.button__text {
-  font-family: var(--accent-font);
-  font-variation-settings: "wght" var(--regular-text-weight);
+.dialog_button_text {
+  font-family: var(--accent-font, sans-serif);
+  font-variation-settings: "wght" var(--regular-text-weight, 410);
   font-size: 14px;
   mix-blend-mode: difference;
   position: relative;
-  color: var(--hover-text-color);
+  color: var(--hover-text-color, #fff);
   z-index: 1;
 }
 
-footer {
-  margin-block: 50px;
+.button__text {
+  font-family: var(--accent-font, sans-serif);
+  font-variation-settings: "wght" var(--regular-text-weight, 410);
+  font-size: 14px;
+  mix-blend-mode: difference;
+  position: relative;
+  color: var(--hover-text-color, #fff);
+  z-index: 1;
+}
+
+.saving_block {
+  margin-block-end: 100px;
 }
 
 .save__button {
-  display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   justify-self: center;
-  background-color: #fff;
   inline-size: clamp(306px, 48.6vw, 335px);
+  min-inline-size: 335px;
   block-size: 55px;
   gap: 8px;
   padding: 15px 10px;
-  position: relative;
 }
 
-.dialog:open {
-  display: flex;
+.dialog {
   flex-direction: column;
   justify-content: center;
   gap: 30px;
   padding: 0;
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, sans-serif);
   font-size: 14px;
   border: 2px solid black;
   inline-size: 353px;
-  block-size: 191px;
+}
+
+.dialog:open {
+  display: flex;
 }
 
 .dialog::backdrop {
-  background-color: #00000094;
+  background-color: #000000;
+  opacity: 75%;
 }
 
 .dialog_content {
@@ -259,43 +274,42 @@ footer {
 .dialog_button {
   inline-size: 293px;
   block-size: 38px;
-  border: 2px solid black;
   align-self: center;
   margin-block-end: 30px;
   padding: 0;
   transition: box-shadow 0.3s ease;
-  position: relative;
+  text-transform: uppercase;
 }
 
-.base_bus {
+.filter_contrast {
   filter: contrast(110%);
 }
 
-.blurred_bus {
+.filter_blur {
   filter: blur(3px) brightness(90%);
 }
 
-.brown_bus {
+.filter_more_contrast {
   filter: contrast(115%);
 }
 
-.green_bus {
+.filter_brightness {
   filter: saturate(130%) brightness(105%);
 }
 
-.negative_bus {
+.filter_grayscale {
   filter: grayscale(0.1);
 }
 
-.neon_bus {
+.filter_bright_contrast {
   filter: brightness(90%) contrast(90%);
 }
 
-.sepia_bus {
+.filter_sepia {
   filter: sepia(80%) contrast(110%) brightness(95%);
 }
 
-.vine_bus {
+.filter_bright_contrast_blur {
   filter: contrast(120%) brightness(110%) blur(2px);
 }
 
@@ -311,18 +325,18 @@ footer {
 }
 
 .contour {
-  fill: var(--contour-color);
+  fill: var(--contour-color, #000);
   transition: fill 0.1s linear;
 }
 
 .like-icon.is-liked .contour {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   transition-delay: 0.06s;
   transition-duration: 0.3s;
 }
 
 .sparks {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   opacity: 0%;
 }
 
@@ -332,19 +346,19 @@ footer {
 }
 
 .like-icon:hover .main-body {
-  fill: var(--heart-hover);
+  fill: var(--heart-hover, #000);
   transition: fill 0.3s linear;
   transition-delay: 0.05s;
 }
 
 .like-icon:active .main-body {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   transition: fill 0.3s linear;
   transition-delay: 0.05s;
 }
 
 .like-icon.is-liked .main-body {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   transition: fill 0.3s linear;
   transition-delay: 0.05s;
 }
@@ -356,19 +370,19 @@ footer {
 }
 
 .like-icon:hover .core {
-  fill: var(--heart-hover);
+  fill: var(--heart-hover, #000);
   transition-delay: 0s;
   transition: fill 0.3s linear;
 }
 
 .like-icon:active .core {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   transition-delay: 0s;
   transition: fill 0.3s linear;
 }
 
 .like-icon.is-liked .core {
-  fill: var(--animation-fill-color);
+  fill: var(--animation-fill-color, #ff0000);
   transition-delay: 0s;
   transition: fill 0.3s linear;
 }
@@ -379,12 +393,16 @@ footer {
 }
 
 .like-icon.is-liked .sparks {
-  animation: sparks 0.3s ease-in 0.3s both;
+  animation: fadeBlink 0.3s ease-in 0.3s both;
 }
 
 @media (width <= 375px) {
-  .header {
-    min-height: 327px;
+  .header_title {
+    padding-top: 122px;
+  }
+
+  .header_subtitle {
+    padding-bottom: 122px;
   }
 
   .card_watermark {
@@ -398,6 +416,7 @@ footer {
   .save__button {
     block-size: 84px;
     flex-direction: column;
+    min-inline-size: 306px;
   }
 
   .floppy_icon {

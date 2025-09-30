@@ -22,7 +22,7 @@
   }
 }
 
-@keyframes sparks {
+@keyframes fadeBlink {
   0% {
     opacity: 0;
   }
