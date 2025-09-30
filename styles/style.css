@@ -317,12 +317,7 @@
   mix-blend-mode: difference;
   z-index: 1;
   filter: invert(1);
-}
-
-.like-icon {
-  width: 39px;
-  height: 36px;
-}
+}   
 
 .contour {
   fill: var(--contour-color, #000);
